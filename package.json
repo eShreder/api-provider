@@ -1,0 +1,26 @@
+{
+  "name": "api-provider",
+  "version": "1.0.0",
+  "description": "Описание общения с api",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jest",
+    "prettier": "prettier ./*.js --write"
+  },
+  "keywords": [],
+  "author": "eShreder",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "normalizr": "^3.2.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.1",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0"
+  }
+}
