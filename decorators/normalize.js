@@ -1,4 +1,5 @@
 import { normalize } from 'normalizr'
+import { ON_RECIVED } from '../constants'
 
 export default (schema, sync = false) => (target, key) => {
     const originalValue = target[key]
@@ -8,10 +9,12 @@ export default (schema, sync = false) => (target, key) => {
             const result = normalize(data, schema)
 
             if (sync && this.emit) {
-                this.emit('API/RECIVED_ENTITY', result)
+                this.emit(ON_RECIVED, result)
             }
 
             return result
         })
     }
+
+    return target
 }
