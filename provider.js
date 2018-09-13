@@ -1,13 +1,13 @@
-import get from 'lodash/get'
-import set from 'lodash/set'
-import map from 'lodash/fp/map'
-import keys from 'lodash/fp/keys'
-import pipe from 'lodash/fp/pipe'
-import filter from 'lodash/fp/filter'
 import curry from 'lodash/curry'
+import filter from 'lodash/fp/filter'
+import get from 'lodash/get'
+import keys from 'lodash/fp/keys'
+import map from 'lodash/fp/map'
+import pipe from 'lodash/fp/pipe'
+import set from 'lodash/set'
 import { METHOD_EXISTS } from './constants'
 
-const omitFields = filter((key) => key !== '_name')
+const omitFields = filter((key) => key[0] !== '_')
 const getMethods = pipe(
     keys,
     omitFields
@@ -23,7 +23,7 @@ const bindContext = curry((context, obj) =>
 )
 
 export class ApiProvider {
-    METHOD_EXISTS = METHOD_EXISTS
+    static METHOD_EXISTS = METHOD_EXISTS
     _methods = {}
 
     constructor(transport, emitter) {
@@ -38,14 +38,14 @@ export class ApiProvider {
             emit: (...params) => this._emitter.emit(...params),
         })
     }
-    setCredentials = (cb) => {
-        Object.assign(this._transport.defaults.headers.common, cb())
+    setCredentials = (obj = {}) => {
+        Object.assign(this._transport.defaults.headers.common, obj)
     }
     registerPartApi = (part) => {
         const name = part._name
 
         if (get(this._methods, name)) {
-            throw new Error(ApiRequests.METHOD_EXISTS)
+            throw new Error(ApiProvider.METHOD_EXISTS)
         } else {
             set(this._methods, name, this.bindContext(part))
         }
