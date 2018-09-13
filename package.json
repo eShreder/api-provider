@@ -1,6 +1,6 @@
 {
     "name": "@eshreder/api-provider",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Описание общения с api",
     "main": "provider.js",
     "scripts": {
