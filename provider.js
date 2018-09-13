@@ -53,4 +53,4 @@ export class ApiProvider {
     registerPartsApi = (...parts) => map(this.registerPartApi, parts)
 }
 
-export default ApiRequests
+export default ApiProvider
