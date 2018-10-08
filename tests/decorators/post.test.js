@@ -44,4 +44,18 @@ describe('api decorators post', () => {
         expect(context.post).not.toHaveBeenCalled()
         expect(result).toBe(foo)
     })
+
+    it('should call fn with more params', () => {
+        const context = {
+            post: jest.fn()
+        }
+        const part = {
+            @post()
+            foo(params) { return 'url from call' }
+        }
+
+        part.foo.call(context, 'params', 'data', 'options', 'random')
+
+        expect(context.post).toHaveBeenCalledWith('url from call', 'data', 'options', 'random')
+    })
 })
